@@ -6,8 +6,11 @@
 /*   By: gyeon <gyeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:29:39 by gyeon             #+#    #+#             */
-/*   Updated: 2021/05/18 01:29:44 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/05/18 14:48:05 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef "GET_NEXT_LINE_H"
+# define "GET_NEXT_LINE_H"
 
+# endif

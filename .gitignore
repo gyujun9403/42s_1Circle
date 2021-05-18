@@ -1,0 +1,6 @@
+test*
+*test
+*test*
+*.o
+*.out
+*.txt
