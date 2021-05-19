@@ -3,6 +3,8 @@ test*
 *test*
 *.o
 *.out
+*.out.*
+*.swp
 *.txt
 badsol/
 
