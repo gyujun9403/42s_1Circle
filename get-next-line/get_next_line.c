@@ -6,25 +6,37 @@
 /*   By: gyeon <gyeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:30:06 by gyeon             #+#    #+#             */
-/*   Updated: 2021/05/19 17:14:50 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/05/20 23:39:54 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	int result;
-	char buff[BUFFER_SIZE];
-	static t_buffchunk bc = {NULL, 0, 0};
+	int					result;
+	static t_buffchunk	bc = {NULL, 0, 0, -1, {0}};
 
-	result = -1;
 	*line = NULL;
 	if (fd < 0 || line == NULL)
 		;
 	else
 	{
-		result = make_bc(fd, buff, &bc);
+		if (bc.num_line > 0)
+		{
+			*line = gnl_buffsplit(&bc);
+			bc.num_line--;
+		}
+		else
+		{
+			make_bc(fd, &bc);
+			*line = gnl_buffsplit(&bc);
+			bc.num_line--;
+		}
 	}
+	if (bc.status != 1 && bc.num_line == 0)
+		result = bc.status;
+	else
+		result = 1;
 	return (result);
 }
