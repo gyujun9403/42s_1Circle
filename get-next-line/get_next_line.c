@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 01:30:06 by gyeon             #+#    #+#             */
-/*   Updated: 2021/05/20 23:39:54 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/05/21 01:20:00 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	get_next_line(int fd, char **line)
 	int					result;
 	static t_buffchunk	bc = {NULL, 0, 0, -1, {0}};
 
-	*line = NULL;
 	if (fd < 0 || line == NULL)
 		;
 	else
