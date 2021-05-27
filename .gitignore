@@ -7,5 +7,6 @@ test*
 *.swp
 *.txt
 .vscode
+workspace.code-workspace
 badsol/
 GNL_lover/
