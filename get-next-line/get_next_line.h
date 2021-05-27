@@ -6,7 +6,7 @@
 /*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:48 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/27 13:09:46 by ygj              ###   ########.fr       */
+/*   Updated: 2021/05/27 19:35:05 by ygj              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef	struct	s_bufflst
 
 int				get_next_line(int fd, char **line);
 void			cnt_nl(t_bufflst *lst);
+t_bufflst		*malloc_lastlst(t_bufflst **lst);
 t_bufflst		*find_lastlst(t_bufflst *lst);
-void			read_n_addlist(int fd, t_bufflst **lst);
+t_bufflst		*read_n_addlist(int fd, t_bufflst **lst);
 char			*get_line(t_bufflst **lst);
 char			*buffcat(t_bufflst **lst, size_t len_line);
 t_bufflst		*free_lst(t_bufflst **lst, short flg);
