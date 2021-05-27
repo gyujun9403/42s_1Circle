@@ -6,7 +6,7 @@
 /*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:10 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/27 21:13:42 by ygj              ###   ########.fr       */
+/*   Updated: 2021/05/27 21:16:20 by ygj              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 int			get_next_line(int fd, char **line)
 {
-	short				not_first;
 	static	t_bufflst	*arr[OPEN_MAX] = {NULL};
 
-	not_first = 1;
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	if (arr[fd] == NULL)
-		not_first = 0;
 	if (arr[fd] == NULL || (arr[fd] != NULL && arr[fd]->num_nl == 0))
 		while (read_n_addlist(fd, &arr[fd])
 		&& find_lastlst(arr[fd])->num_nl == 0)
@@ -34,7 +30,7 @@ int			get_next_line(int fd, char **line)
 		free_lst(&arr[fd], 1);
 		return (-1);
 	}
-	if (arr[fd]->is_eof == 0 || arr[fd]->num_nl != 0 || !not_first)
+	if (arr[fd]->is_eof == 0 || arr[fd]->num_nl != 0)
 		return (1);
 	free_lst(&arr[fd], 1);
 	return (0);
