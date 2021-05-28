@@ -6,7 +6,7 @@
 /*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 18:07:21 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/27 21:19:54 by ygj              ###   ########.fr       */
+/*   Updated: 2021/05/29 02:09:42 by ygj              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,17 @@ t_bufflst	*malloc_lastlst(t_bufflst **lst)
 	{
 		*lst = (t_bufflst *)malloc(sizeof(t_bufflst));
 		if (*lst == NULL)
-		{
-			free_lst(lst, 1);
-			last = NULL;
-		}
-		else
-			last = *lst;
+			free_lst(lst, FREE_ALL);
+		last = *lst;
 	}
 	else
 	{
 		last = find_lastlst(*lst);
 		last->next = (t_bufflst *)malloc(sizeof(t_bufflst));
 		if (last == NULL)
-			free_lst(lst, 1);
-		last = last->next;
+			free_lst(lst, FREE_ALL);
+		else
+			last = last->next;
 	}
 	return (last);
 }
@@ -63,10 +60,15 @@ t_bufflst	*add_lastlst(t_bufflst **lst)
 		last->next = NULL;
 		last->buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 		if (last->buff == NULL)
-			last->state = -1;
+		{
+			free_lst(lst, FREE_ALL);
+			last = NULL;
+		}
 		else
+		{
 			last->state = 0;
-		last->st_buff = last->buff;
+			last->st_buff = last->buff;
+		}
 	}
 	return (last);
 }
@@ -76,7 +78,7 @@ t_bufflst	*free_lst(t_bufflst **lst, short flg)
 	t_bufflst	*temp;
 
 	temp = NULL;
-	if (flg == 0)
+	if (flg == FREE_ONE)
 	{
 		temp = (*lst)->next;
 		free((*lst)->buff);
@@ -89,7 +91,9 @@ t_bufflst	*free_lst(t_bufflst **lst, short flg)
 		{
 			temp = (*lst)->next;
 			free((*lst)->buff);
+			(*lst)->buff = NULL;
 			free(*lst);
+			*lst = NULL;
 			*lst = temp;
 		}
 	}

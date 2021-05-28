@@ -6,7 +6,7 @@
 /*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:10 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/27 21:19:55 by ygj              ###   ########.fr       */
+/*   Updated: 2021/05/29 02:09:33 by ygj              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 
 int			get_next_line(int fd, char **line)
 {
+	short				value_return;
 	static	t_bufflst	*arr[OPEN_MAX] = {NULL};
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || !line)
-		return (-1);
-	if (arr[fd] == NULL || (arr[fd] != NULL && arr[fd]->num_nl == 0))
-		while (read_n_addlist(fd, &arr[fd])
-		&& find_lastlst(arr[fd])->num_nl == 0)
-			;
-	if (arr[fd] == NULL)
-		return (-1);
-	*line = get_line(&arr[fd]);
-	if (*line == NULL)
+	value_return = -1;
+	if (fd >= 0 && fd < OPEN_MAX && BUFFER_SIZE > 0 && line)
 	{
-		free_lst(&arr[fd], 1);
-		return (-1);
+		if (arr[fd] == NULL || (arr[fd] != NULL && arr[fd]->num_nl == 0))
+			while (rnadd_lst(fd, &arr[fd]) && !find_lastlst(arr[fd])->num_nl)
+				;
+		if (arr[fd] != NULL)
+		{
+			*line = get_line(&arr[fd]);
+			if (*line != NULL)
+			{
+				if (arr[fd]->is_eof == 1 && arr[fd]->num_nl == 0)
+				{
+					free_lst(&arr[fd], FREE_ALL);
+					value_return = 0;
+				}
+				else
+					value_return = 1;
+			}
+		}
 	}
-	if (arr[fd]->is_eof == 0 || arr[fd]->num_nl != 0)
-		return (1);
-	free_lst(&arr[fd], 1);
-	return (0);
+	return (value_return);
 }
 
 void		cnt_nl(t_bufflst *lst)
@@ -52,7 +57,7 @@ void		cnt_nl(t_bufflst *lst)
 		lst->num_nl++;
 }
 
-t_bufflst	*read_n_addlist(int fd, t_bufflst **lst)
+t_bufflst	*rnadd_lst(int fd, t_bufflst **lst)
 {
 	t_bufflst	*last_lst;
 
@@ -69,7 +74,7 @@ t_bufflst	*read_n_addlist(int fd, t_bufflst **lst)
 			return (*lst);
 		}
 		else
-			free_lst(lst, 1);
+			free_lst(lst, FREE_ALL);
 	}
 	return (NULL);
 }
@@ -105,14 +110,14 @@ char		*buffcat(t_bufflst **lst, size_t len_line)
 	line = (char *)malloc((len_line + 1) * sizeof(char));
 	if (line == NULL)
 	{
-		free_lst(lst, 1);
+		free_lst(lst, FREE_ALL);
 		return (line);
 	}
 	while ((*lst)->num_nl == 0)
 	{
 		while (*((*lst)->st_buff) != '\0')
 			*(line + idx++) = *((*lst)->st_buff++);
-		free_lst(lst, 0);
+		free_lst(lst, FREE_ONE);
 	}
 	while (*((*lst)->st_buff) != '\n' && *((*lst)->st_buff))
 		*(line + idx++) = *((*lst)->st_buff++);
