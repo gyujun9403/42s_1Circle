@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:10 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/29 01:53:30 by ygj              ###   ########.fr       */
+/*   Updated: 2021/06/01 16:24:38 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		cnt_nl(t_bufflst *lst)
 		if (*(lst->buff + index++) == '\n')
 			lst->num_nl++;
 	}
-	if (lst->state != BUFFER_SIZE)
+	if (lst->leng != BUFFER_SIZE)
 		lst->num_nl++;
 }
 
@@ -64,12 +64,12 @@ t_bufflst	*rnadd_lst(int fd, t_bufflst **lst)
 	last_lst = add_lastlst(lst);
 	if (last_lst != NULL)
 	{
-		last_lst->state = read(fd, last_lst->buff, BUFFER_SIZE);
-		if (last_lst->state != ERR)
+		last_lst->leng = read(fd, last_lst->buff, BUFFER_SIZE);
+		if (last_lst->leng != ERR)
 		{
-			*(last_lst->buff + last_lst->state) = '\0';
+			*(last_lst->buff + last_lst->leng) = '\0';
 			cnt_nl(last_lst);
-			if (last_lst->state != BUFFER_SIZE)
+			if (last_lst->leng != BUFFER_SIZE)
 				last_lst->is_eof = 1;
 			return (*lst);
 		}
@@ -90,14 +90,14 @@ char		*get_line(t_bufflst **lst)
 	temp = *lst;
 	while (temp->num_nl == 0)
 	{
-		len_line += temp->state;
+		len_line += temp->leng;
 		temp = temp->next;
 	}
 	while (*(temp->st_buff + idx) != '\n' && *(temp->st_buff + idx))
 		idx++;
 	len_line += idx;
-	if (temp->state > 0)
-		temp->state -= ++idx;
+	if (temp->leng > 0)
+		temp->leng -= ++idx;
 	return (buffcat(lst, len_line));
 }
 

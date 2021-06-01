@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 18:07:21 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/29 02:09:42 by ygj              ###   ########.fr       */
+/*   Updated: 2021/06/01 16:24:35 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_bufflst	*add_lastlst(t_bufflst **lst)
 		}
 		else
 		{
-			last->state = 0;
+			last->leng = 0;
 			last->st_buff = last->buff;
 		}
 	}

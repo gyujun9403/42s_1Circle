@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:48 by ygj               #+#    #+#             */
-/*   Updated: 2021/05/29 02:21:09 by ygj              ###   ########.fr       */
+/*   Updated: 2021/06/01 16:24:33 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
 # include <limits.h>
 # define ERR -1
 # define FREE_ALL 1
@@ -27,7 +25,7 @@ typedef	struct	s_bufflst
 	char				*buff;
 	char				*st_buff;
 	size_t				num_nl;
-	ssize_t				state;
+	ssize_t				leng;
 	short				is_eof;
 	struct s_bufflst	*next;
 }				t_bufflst;
