@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 18:07:21 by ygj               #+#    #+#             */
-/*   Updated: 2021/06/01 16:24:36 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/03 11:41:00 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_bufflst	*add_lastlst(t_bufflst **lst)
 	return (last);
 }
 
-t_bufflst	*free_lst(t_bufflst **lst, short flg)
+void		free_lst(t_bufflst **lst, short flg)
 {
 	t_bufflst	*temp;
 
@@ -91,32 +91,8 @@ t_bufflst	*free_lst(t_bufflst **lst, short flg)
 		{
 			temp = (*lst)->next;
 			free((*lst)->buff);
-			(*lst)->buff = NULL;
 			free(*lst);
-			*lst = NULL;
 			*lst = temp;
 		}
 	}
-	return (temp);
-}
-
-size_t		gnl_strchr(const char *s, int c)
-{
-	size_t	i;
-	char	*answer;
-
-	i = 0;
-	answer = NULL;
-	while (*(s + i) != '\0')
-	{
-		if (*(s + i) == (unsigned char)c)
-		{
-			answer = (char *)s + i;
-			break ;
-		}
-		i++;
-	}
-	if (*(s + i) == '\0' && (unsigned char)c == '\0')
-		answer = (char *)s + i;
-	return (i);
 }

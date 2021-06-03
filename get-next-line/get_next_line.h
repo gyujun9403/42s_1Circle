@@ -6,16 +6,20 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:48 by ygj               #+#    #+#             */
-/*   Updated: 2021/06/01 16:24:39 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/03 12:48:35 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
- 
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 10240
+# endif
 # define ERR -1
 # define FREE_ALL 1
 # define FREE_ONE 0
@@ -37,7 +41,7 @@ t_bufflst		*find_lastlst(t_bufflst *lst);
 t_bufflst		*rnadd_lst(int fd, t_bufflst **lst);
 char			*get_line(t_bufflst **lst);
 char			*buffcat(t_bufflst **lst, size_t len_line);
-t_bufflst		*free_lst(t_bufflst **lst, short flg);
+void			free_lst(t_bufflst **lst, short flg);
 t_bufflst		*add_lastlst(t_bufflst **lst);
 size_t			gnl_strchr(const char *s, int c);
 
