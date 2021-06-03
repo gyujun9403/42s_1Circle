@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 18:07:21 by ygj               #+#    #+#             */
-/*   Updated: 2021/06/03 11:41:00 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/03 18:40:08 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,22 @@ void		free_lst(t_bufflst **lst, short flg)
 	temp = NULL;
 	if (flg == FREE_ONE)
 	{
-		temp = (*lst)->next;
-		free((*lst)->buff);
-		free(*lst);
-		*lst = temp;
+		if (*lst != NULL)
+		{
+			if ((*lst)->buff != NULL)
+				free((*lst)->buff);
+			temp = (*lst)->next;
+			free(*lst);
+			*lst = temp;
+		}
 	}
 	else
 	{
 		while (*lst != NULL)
 		{
+			if ((*lst)->buff != NULL)
+				free((*lst)->buff);
 			temp = (*lst)->next;
-			free((*lst)->buff);
 			free(*lst);
 			*lst = temp;
 		}

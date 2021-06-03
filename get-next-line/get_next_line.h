@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:48 by ygj               #+#    #+#             */
-/*   Updated: 2021/06/03 12:48:35 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/03 18:29:42 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define ERR -1
 # define FREE_ALL 1
 # define FREE_ONE 0
+# define TRUE 1
+# define FALSE 0
 
 typedef	struct	s_bufflst
 {
@@ -43,6 +45,5 @@ char			*get_line(t_bufflst **lst);
 char			*buffcat(t_bufflst **lst, size_t len_line);
 void			free_lst(t_bufflst **lst, short flg);
 t_bufflst		*add_lastlst(t_bufflst **lst);
-size_t			gnl_strchr(const char *s, int c);
 
 #endif
