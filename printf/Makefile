@@ -1,10 +1,11 @@
 GCC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libftprintf.a
-SRCS = ./ft_printf.c ./libft/*.c
+NAME = printf.a
+SRCS = ./ft_printf.c ./pf_putnbr_fd.c
+SRCS_LIBFT = ./libft/ft_bzro.c ./libft/ft_putchar_fd.c ./libft/ft_putnbr_fd.c ./libft/ft_putstr_fd.c
 OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 INCLUDE = -I ./ft_printf.h
+INCLUDE_LIBFT = -I ./libft/libft.h
 
 all : $(NAME)
 

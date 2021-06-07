@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:45:43 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/07 21:23:12 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/07 23:54:47 by ygj              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ void	pf_putnstr_fd(char *s, size_t n, int fd)
 	}
 }
 
-size_t		pf_cnt_digit(int num, int degree)
-{
-	long	temp_num;
-	size_t	digit;
-
-	digit = 0;
-	if (num < 0)
-	{
-		temp_num = (long)(-num);
-		digit++;
-	}
-	else
-		temp_num = (long)num;
-	while (temp_num != 0)
-	{
-		digit++;
-		temp_num /= degree;
-	}
-	return (digit);
-}
-
 void	print_int(va_list ap, t_data data)
 {
 	int i;
@@ -80,7 +59,6 @@ void	print_int(va_list ap, t_data data)
 	i = va_arg(ap, int);
 	digit = pf_cnt_digit(i, 10);
 	len_prted = 0;
-
 	
 	if (data.leng_width > digit)
 		len_empty = data.leng_width - digit;
@@ -88,19 +66,7 @@ void	print_int(va_list ap, t_data data)
 		len_empty = 0;
 	if (data.flg_zero == 1 && data.flg_hypen == 1)
 	{
-		if (i < 0)
-			ft_putchar_fd('-', STD_OUT);
-		while (len_prted < len_empty)
-		{
-			len_prted++;
-			ft_putchar_fd('0', STD_OUT);
-		}
-		if (i == MIN_INT)
-			ft_putstr_fd("2147483648", STD_OUT);
-		else if (i < 0)
-			ft_putnbr_fd(-i, STD_OUT);
-		else
-			ft_putnbr_fd(i, STD_OUT);		
+		pf_putnbr_fd(i, len_empty, STD_OUT);
 	}
 	else if (data.flg_zero == 1)
 	{
@@ -132,19 +98,7 @@ void	print_int(va_list ap, t_data data)
 			len_prted++;
 			ft_putchar_fd(' ', STD_OUT);
 		}
-		if (i < 0)
-			ft_putchar_fd('-', STD_OUT);
-		while (digit < len_data)
-		{
-			digit++;
-			ft_putchar_fd('0', STD_OUT);
-		}
-		if (i == MIN_INT)
-			ft_putstr_fd("2147483648", STD_OUT);
-		else if (i < 0)
-			ft_putnbr_fd(-i, STD_OUT);
-		else
-			ft_putnbr_fd(i, STD_OUT);		
+		pf_putnbr_fd(i, data.flg_precision, STD_OUT);	
 	}
 	
 }
