@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:45:43 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/07 23:54:47 by ygj              ###   ########.fr       */
+/*   Updated: 2021/06/08 12:30:00 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,57 +50,28 @@ void	pf_putnstr_fd(char *s, size_t n, int fd)
 void	print_int(va_list ap, t_data data)
 {
 	int i;
-	size_t	len_empty;
-	size_t	digit;
 	size_t	len_prted;
-	size_t	len_data;
-	size_t	len_empty2;
 	
 	i = va_arg(ap, int);
-	digit = pf_cnt_digit(i, 10);
-	len_prted = 0;
-	
-	if (data.leng_width > digit)
-		len_empty = data.leng_width - digit;
-	else
-		len_empty = 0;
-	if (data.flg_zero == 1 && data.flg_hypen == 1)
+	if (data.flg_hypen == 0)
 	{
-		pf_putnbr_fd(i, len_empty, STD_OUT);
-	}
-	else if (data.flg_zero == 1)
-	{
-		while (len_prted < len_empty)
+		len_prted = pf_cntnbr_fd(i, data);
+		while (len_prted < data.leng_width)
 		{
 			len_prted++;
 			ft_putchar_fd(' ', STD_OUT);
 		}
-		ft_putnbr_fd(i, STD_OUT);
-	}
-	else if (data.flg_hypen == 1)
-	{
-		ft_putnbr_fd(i, STD_OUT);
-		while (len_prted < len_empty)
-		{
-			len_prted++;
-			ft_putchar_fd(' ', STD_OUT);
-		}
+		pf_putnbr_fd(i, data, STD_OUT);	
 	}
 	else
 	{
-		if (i < 0)
-			len_data = (digit < data.leng_precision + 1) ? (data.leng_precision + 1) : (digit + 1);
-		else
-			len_data = (digit < data.leng_precision) ? (data.leng_precision) : (digit);
-		len_empty2 = (data.leng_width > len_data) ? (data.leng_width - len_data) : (0);
-		while (len_prted < len_empty2)
+		len_prted = pf_putnbr_fd(i, data, STD_OUT);
+		while (len_prted < data.leng_width)
 		{
 			len_prted++;
 			ft_putchar_fd(' ', STD_OUT);
 		}
-		pf_putnbr_fd(i, data.flg_precision, STD_OUT);	
 	}
-	
 }
 void    print_char(va_list ap, t_data data)
 {

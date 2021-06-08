@@ -1,0 +1,38 @@
+if (data.flg_zero == 1 && data.flg_hypen == 1)
+{
+	len_prted = pf_putnbr_fd(i, data, STD_OUT);
+	while (len_prted < data.leng_width)
+	{
+		len_prted++;
+		ft_putchar_fd(' ', STD_OUT);
+	}
+}
+else if (data.flg_zero == 1)
+{
+	len_prted = pf_cntnbr_fd(i, data);
+	while (len_prted < data.leng_width)
+	{
+		len_prted++;
+		ft_putchar_fd(' ', STD_OUT);
+	}
+	pf_putnbr_fd(i, data, STD_OUT);
+}
+else if (data.flg_hypen == 1)
+{
+	len_prted = pf_putnbr_fd(i, data, STD_OUT);
+	while (len_prted < data.leng_width)
+	{
+		len_prted++;
+		ft_putchar_fd(' ', STD_OUT);
+	}
+}
+else
+{
+	len_prted = pf_cntnbr_fd(i, data);
+	while (len_prted < data.leng_width)
+	{
+		len_prted++;
+		ft_putchar_fd(' ', STD_OUT);
+	}
+	pf_putnbr_fd(i, data, STD_OUT);	
+}

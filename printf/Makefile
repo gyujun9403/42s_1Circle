@@ -1,29 +1,32 @@
-GCC = gcc
-CFLAGS = -Wall -Wextra -Werror
-NAME = printf.a
-SRCS = ./ft_printf.c ./pf_putnbr_fd.c
-SRCS_LIBFT = ./libft/ft_bzro.c ./libft/ft_putchar_fd.c ./libft/ft_putnbr_fd.c ./libft/ft_putstr_fd.c
-OBJS = $(SRCS:.c=.o)
-INCLUDE = -I ./ft_printf.h
-INCLUDE_LIBFT = -I ./libft/libft.h
+NAME		= libftprintf.a
+LIBFT		= libft
+LIBFT_LIB	= libft.a
+
+SRCS		= ./ft_printf.c\
+			  ./pf_putnbr_fd.c
+OBJS		= $(SRCS:.c=.o)
+INCS		= .
+RM			= rm -f
+LIBC		= ar rc
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+
+.c.o :
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(INCS)
+
+$(NAME) : $(OBJS)
+	make all -C $(LIBFT)/
+	cp $(LIBFT)/$(LIBFT_LIB) $(NAME)
+	$(LIBC) $(NAME) $(OBJS)
 
 all : $(NAME)
 
-%.o : %.c
-	$(GCC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+fclean : clean
+	$(RM) $(NAME)
+	make fclean -C $(LIBFT)
 
-$(NAME) : $(OBJS)
-	ar rcs $@ $^
-
-clean : 
-	rm -f $(OBJS) $(OBJS_BONUS)
-
-fclean : 
-	rm -f $(NAME)
+clean :
+	$(RM) $(OBJS)
+	make clean -C $(LIBFT)
 
 re : fclean all
-
-bonus : $(OBJS_BONUS)
-	ar rcs $(NAME) $^
-
-.PHONY : all clean fclean re bonus

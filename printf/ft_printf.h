@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygj <ygj@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:47:52 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/07 23:54:50 by ygj              ###   ########.fr       */
+/*   Updated: 2021/06/08 12:15:50 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct  s_data
 }               t_data;
 
 int ft_printf(const char *format, ...);
-size_t		pf_cnt_digit(int num, int degree);
-void	pf_putnbr_fd(int n, int precision, int fd);
+size_t		pf_cnt_digit(int num, int degree, t_data data);
+size_t	pf_cntnbr_fd(int n, t_data data);
+size_t	pf_putnbr_fd(int n, t_data data, int fd);
 
 #endif
