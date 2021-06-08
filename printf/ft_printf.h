@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:47:52 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 12:15:50 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/08 15:23:06 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ typedef struct  s_data
     size_t	leng_width;
     size_t	leng_precision;
     short	type;
+	short 	cnt;
 }               t_data;
 
 int ft_printf(const char *format, ...);
 size_t		pf_cnt_digit(int num, int degree, t_data data);
 size_t	pf_cntnbr_fd(int n, t_data data);
 size_t	pf_putnbr_fd(int n, t_data data, int fd);
+size_t	repeat_char(char c, size_t from, size_t until);
 
 #endif

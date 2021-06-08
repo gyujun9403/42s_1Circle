@@ -3,7 +3,8 @@ LIBFT		= libft
 LIBFT_LIB	= libft.a
 
 SRCS		= ./ft_printf.c\
-			  ./pf_putnbr_fd.c
+			  ./pf_putnbr_fd.c\
+			  ./utils.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f

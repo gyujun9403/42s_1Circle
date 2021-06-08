@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 12:44:41 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 12:18:44 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/08 15:28:00 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t		pf_cnt_digit(int num, int degree, t_data data)
 	return (digit);
 }
 
-void	pf_print_num(int n, int fd)
+void	pf_print_num(unsigned int n, int fd)
 {
 	if (n < 10)
 		write(fd, &("0123456789"[n]), sizeof(char));
@@ -91,34 +91,22 @@ size_t	pf_putnbr_fd(int n, t_data data, int fd)
 
 	cnt_zero = 0;
 	len_zero = find_len_zero(n, data, 10);
-	if (n == -2147483648)
-		{
-			write(fd, "-", sizeof(char));
-			while (cnt_zero++ < len_zero)
-				write(fd, "0", sizeof(char));
-			write(fd, "2147483648", sizeof(char) * 10);
-		}
-	else if (n < 0)
+	if (n < 0)
 	{
 		write(fd, "-", sizeof(char));
-		while (cnt_zero++ < len_zero)
-				write(fd, "0", sizeof(char));
-		pf_print_num(-n, fd);
+		repeat_char('0', cnt_zero, len_zero);
+		pf_print_num((unsigned int)(-n), fd);
 	}
 	else if (n == 0)
 	{
 		if (!(data.flg_precision == 1 && data.leng_precision == 0))
 			write(fd, "0", sizeof(char));
-		//else
-		//	write(fd, " ", sizeof(char));
-		while (cnt_zero++ < len_zero)
-			write(fd, "0", sizeof(char));
+		repeat_char('0', cnt_zero, len_zero);
 	}
 	else
 	{
-		while (cnt_zero++ < len_zero)
-				write(fd, "0", sizeof(char));
-		pf_print_num(n, fd);
+		repeat_char('0', cnt_zero, len_zero);
+		pf_print_num((unsigned int)n, fd);
 	}
 	return (len_zero + pf_cnt_digit(n, 10, data));
 }
