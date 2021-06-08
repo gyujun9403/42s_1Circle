@@ -8,7 +8,8 @@ SRCS		= ./ft_printf.c\
 			  ./dec_n_int.c\
 			  ./unsigned_int.c\
 			  ./hex.c\
-			  ./pointer.c
+			  ./pointer.c\
+			  ./ampersand.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f

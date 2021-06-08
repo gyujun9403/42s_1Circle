@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:47:52 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 20:58:33 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/08 21:44:16 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ size_t	cnt_digit_p(unsigned long long num, t_data data, int degree);
 size_t	len_zero_p(unsigned long long num, t_data data, int degree);
 
 size_t	print_point(va_list ap, t_data data);
+
+size_t	print_ampersand(t_data data);
 #endif

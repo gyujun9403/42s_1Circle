@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:45:43 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 20:57:29 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/08 21:44:22 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ short    check_type(const char c, t_data *data)
         data->type = TYPE_S_HEX;
     else if (c == 'X')
         data->type = TYPE_L_HEX;
+	else if (c == '%')
+        data->type = TYPE_AMPERSAND;
     return (data->type);
 }
 
@@ -97,7 +99,7 @@ size_t	check_opt(const char **format, va_list ap)
 	else if (data.type == TYPE_POINT)
 		return (print_point(ap, data));
 	else if (data.type == TYPE_AMPERSAND)
-		;//return (print_hex(ap, data));
+		return (print_ampersand(data));
 	return (0);
 }
 
