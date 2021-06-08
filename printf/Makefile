@@ -3,8 +3,12 @@ LIBFT		= libft
 LIBFT_LIB	= libft.a
 
 SRCS		= ./ft_printf.c\
-			  ./pf_putnbr_fd.c\
-			  ./utils.c
+			  ./utils.c\
+			  ./char_n_string.c\
+			  ./dec_n_int.c\
+			  ./unsigned_int.c\
+			  ./hex.c\
+			  ./pointer.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f
