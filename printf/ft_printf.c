@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:45:43 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/09 12:02:36 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 12:55:37 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	get_asterisk(const char **format, va_list ap, t_data *data, short flg)
 	temp = va_arg(ap, int);
 	if (flg == IS_WIDTH)
 	{
-		data->flg_width = 1;
+		data->flg_width = TRUE;
 		if (temp < 0)
 		{
-			data->flg_hypen = 1;
+			data->flg_hypen = TRUE;
 			data->leng_width = -temp;
 		}
 		else
@@ -59,7 +59,7 @@ void	get_asterisk(const char **format, va_list ap, t_data *data, short flg)
 	else
 	{
 		if (temp < 0)
-			data->flg_precision = 0;
+			data->flg_precision = FALSE;
 		else
 			data->leng_precision = temp;
 	}
@@ -83,19 +83,19 @@ size_t	check_opt(const char **format, va_list ap)
 	ft_bzero((void *)&data, sizeof(data));
 	while (**format == '0' || **format == '-')
 		if (*((*format)++) == '0')
-			data.flg_zero = 1;
+			data.flg_zero = TRUE;
 		else
-			data.flg_hypen = 1;
+			data.flg_hypen = TRUE;
 	if (ft_isdigit(**format))
 	{
-		data.flg_width = 1;
+		data.flg_width = TRUE;
 		get_format_nbr(format, &data, IS_WIDTH);
 	}
 	else if (**format == '*')
 		get_asterisk(format, ap, &data, IS_WIDTH);
 	if (**format == '.')
 	{
-		data.flg_precision = 1;
+		data.flg_precision = TRUE;
 		++*format;
 		if (ft_isdigit(**format))
 			get_format_nbr(format, &data, IS_PRECISION);

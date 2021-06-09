@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 09:47:52 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/09 12:16:54 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 13:47:22 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "./libft/libft.h"
 # include <stdarg.h>
 
+# define TRUE			1
+# define FALSE			0
 # define STD_OUT		1
 # define S_HEX			0
 # define L_HEX			1
@@ -36,24 +38,24 @@ typedef	struct	s_data
 
 int				ft_printf(const char *format, ...);
 /*
-** functon in dec_n_int.c
-*/
-void			pf_print_num(unsigned int n, int fd);
-size_t			pf_cnt_int(int n, t_data data);
-size_t			pf_put_int(int n, t_data data, int fd);
-size_t			print_int(va_list ap, t_data data);
-/*
-** functon in utils.c
+** functons in utils.c
 */
 size_t			repeat_char(char c, size_t from, size_t until);
-size_t			find_len_zero(long long num, t_data data, int degree);
-size_t			pf_cnt_digit(long long num, t_data data, int degree);
-size_t			cnt_digit_p(unsigned long long num, t_data data, int degree);
-size_t			len_zero_p(unsigned long long num, t_data data, int degree);
+size_t			f_len_zero(long long num, t_data data, int degree);
+size_t			f_digit(long long num, t_data data, int degree);
+size_t			f_len_zero_p(unsigned long long num, t_data data, int degree);
+size_t			f_digit_p(unsigned long long num, t_data data, int degree);
 /*
-** functon in char_n_string.c
+** functons in dec_n_int.c
 */
-size_t			pf_putnstr_fd(char *s, size_t n, int fd);
+void			put_num(unsigned int n);
+size_t			pf_cnt_int(int n, t_data data);
+size_t			pf_put_int(int n, t_data data);
+size_t			print_int(va_list ap, t_data data);
+/*
+** functons in char_n_string.c
+*/
+size_t			pf_putnstr(char *s, size_t n);
 size_t			print_char(va_list ap, t_data data);
 size_t			print_string(va_list ap, t_data data);
 /*

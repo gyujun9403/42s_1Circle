@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 14:34:38 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/09 11:49:03 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 12:53:31 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ size_t	repeat_char(char c, size_t from, size_t until)
 	return (cnt);
 }
 
-size_t	pf_cnt_digit(long long num, t_data data, int degree)
+size_t	f_digit(long long num, t_data data, int degree)
 {
 	long long	temp_num;
 	size_t		digit;
 
-	if (num == 0 && data.flg_precision == 1 && data.leng_precision == 0)
+	if (num == 0 && data.flg_precision == TRUE && data.leng_precision == FALSE)
 		digit = 0;
 	else if (num == 0)
 		digit = 1;
@@ -54,13 +54,13 @@ size_t	pf_cnt_digit(long long num, t_data data, int degree)
 	return (digit);
 }
 
-size_t	find_len_zero(long long num, t_data data, int degree)
+size_t	f_len_zero(long long num, t_data data, int degree)
 {
 	size_t digit;
 
-	digit = pf_cnt_digit(num, data, degree);
-	if (data.flg_zero == 1 && data.flg_hypen == 0
-		&& data.flg_precision == 0)
+	digit = f_digit(num, data, degree);
+	if (data.flg_zero == TRUE && data.flg_hypen == FALSE
+		&& data.flg_precision == FALSE)
 	{
 		if (digit < data.leng_width)
 			return (data.leng_width - digit);
@@ -81,11 +81,11 @@ size_t	find_len_zero(long long num, t_data data, int degree)
 	return (0);
 }
 
-size_t	cnt_digit_p(unsigned long long num, t_data data, int degree)
+size_t	f_digit_p(unsigned long long num, t_data data, int degree)
 {
 	size_t				digit;
 
-	if (num == 0 && data.flg_precision == 1 && data.leng_precision == 0)
+	if (num == 0 && data.flg_precision == TRUE && data.leng_precision == FALSE)
 		digit = 0;
 	else if (num == 0)
 		digit = 1;
@@ -101,15 +101,15 @@ size_t	cnt_digit_p(unsigned long long num, t_data data, int degree)
 	return (digit);
 }
 
-size_t	len_zero_p(unsigned long long num, t_data data, int degree)
+size_t	f_len_zero_p(unsigned long long num, t_data data, int degree)
 {
 	size_t digit;
 
-	digit = cnt_digit_p(num, data, degree);
+	digit = f_digit_p(num, data, degree);
 	if (num != 0)
 	{
-		if (data.flg_zero == 1 && data.flg_hypen == 0
-			&& data.flg_precision == 0)
+		if (data.flg_zero == TRUE && data.flg_hypen == FALSE
+			&& data.flg_precision == FALSE)
 		{
 			if (digit < data.leng_width && data.leng_width > 12)
 				return (data.leng_width - digit);
