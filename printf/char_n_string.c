@@ -6,23 +6,23 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:12:05 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 16:26:19 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 13:46:14 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	pf_putnstr_fd(char *s, size_t n, int fd)
+size_t	pf_putnstr(char *s, size_t n)
 {
 	size_t	index;
 
 	index = 0;
-	if (s == NULL || fd < 0)
+	if (s == NULL)
 		;
 	else
 	{
 		while (*(s + index) && index < n)
-			write(fd, (s + index++), sizeof(char));
+			write(STD_OUT, (s + index++), sizeof(char));
 	}
 	return (index);
 }
@@ -34,13 +34,13 @@ size_t	print_char(va_list ap, t_data data)
 
 	len_prted = 0;
 	c = va_arg(ap, int);
-	if (data.flg_hypen == 1 && data.flg_width == 1)
+	if (data.flg_hypen == TRUE && data.flg_width == TRUE)
 	{
 		ft_putchar_fd(c, STD_OUT);
 		++len_prted;
 		len_prted += repeat_char(' ', len_prted, data.leng_width);
 	}
-	else if (data.flg_hypen == 0 && data.flg_width == 1)
+	else if (data.flg_hypen == FALSE && data.flg_width == TRUE)
 	{
 		len_prted += repeat_char(' ', len_prted + 1, data.leng_width);
 		ft_putchar_fd(c, STD_OUT);
@@ -64,18 +64,18 @@ size_t	print_string(va_list ap, t_data data)
 	if ((c = va_arg(ap, char *)) == NULL)
 		c = "(null)";
 	len_str = ft_strlen(c);
-	if (data.flg_precision == 1 && data.leng_precision < len_str)
+	if (data.flg_precision == TRUE && data.leng_precision < len_str)
 		len_str = data.leng_precision;
 	if (data.leng_width > len_str)
 	{
-		if (data.flg_hypen == 0)
+		if (data.flg_hypen == FALSE)
 		{
 			len_prted += repeat_char(' ', len_prted, data.leng_width - len_str);
-			return (len_prted + pf_putnstr_fd(c, len_str, STD_OUT));
+			return (len_prted + pf_putnstr(c, len_str));
 		}
-		len_prted += pf_putnstr_fd(c, len_str, STD_OUT);
+		len_prted += pf_putnstr(c, len_str);
 		return (len_prted + repeat_char(' ', len_prted, data.leng_width));
 	}
 	else
-		return (pf_putnstr_fd(c, len_str, STD_OUT));
+		return (pf_putnstr(c, len_str));
 }
