@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:09:29 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 20:17:35 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 11:42:47 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pf_print_hex(unsigned int n, int fd, short type)
 {
-	if (type == TYPE_S_HEX)
+	if (type == S_HEX)
 	{
 		if (n < 16)
 			write(fd, &("0123456789abcdef"[n]), sizeof(char));
@@ -41,7 +41,7 @@ size_t	pf_cnt_hex(unsigned int n, t_data data)
 	return (find_len_zero(n, data, 16) + pf_cnt_digit(n, data, 16));
 }
 
-size_t	pf_put_hex(unsigned int n, t_data data, int fd)
+size_t	pf_put_hex(unsigned int n, t_data data, short type)
 {
 	size_t len_zero;
 	size_t cnt_zero;
@@ -51,18 +51,18 @@ size_t	pf_put_hex(unsigned int n, t_data data, int fd)
 	if (n == 0)
 	{
 		if (!(data.flg_precision == 1 && data.leng_precision == 0))
-			write(fd, "0", sizeof(char));
+			write(STD_OUT, "0", sizeof(char));
 		repeat_char('0', cnt_zero, len_zero);
 	}
 	else
 	{
 		repeat_char('0', cnt_zero, len_zero);
-		pf_print_hex(n, fd, data.type);
+		pf_print_hex(n, STD_OUT, type);
 	}
 	return (len_zero + pf_cnt_digit(n, data, 16));
 }
 
-size_t	print_hex(va_list ap, t_data data)
+size_t	print_hex(va_list ap, t_data data, short type)
 {
 	unsigned int	ui;
 	size_t			len_prted;
@@ -72,11 +72,11 @@ size_t	print_hex(va_list ap, t_data data)
 	{
 		len_prted = pf_cnt_hex(ui, data);
 		len_prted += repeat_char(' ', len_prted, data.leng_width);
-		pf_put_hex(ui, data, STD_OUT);
+		pf_put_hex(ui, data, type);
 	}
 	else
 	{
-		len_prted = pf_put_hex(ui, data, STD_OUT);
+		len_prted = pf_put_hex(ui, data, type);
 		len_prted += repeat_char(' ', len_prted, data.leng_width);
 	}
 	return (len_prted);

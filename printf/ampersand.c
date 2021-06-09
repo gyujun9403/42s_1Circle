@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 21:27:48 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/08 21:48:53 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 09:06:35 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,10 @@ size_t	len_zero_amp(t_data data)
 
 	digit = 1;
 	if (data.flg_zero == 1 && data.flg_hypen == 0)
-		//&& data.flg_precision == 0)
 	{
 		if (digit < data.leng_width)
 			return (data.leng_width - digit);
 	}
-	/*else
-	{
-		if (digit < data.leng_precision)
-			return (data.leng_precision - digit);
-	}*/
 	return (0);
 }
 

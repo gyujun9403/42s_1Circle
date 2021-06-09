@@ -1,3 +1,6 @@
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+
 NAME		= libftprintf.a
 LIBFT		= libft
 LIBFT_LIB	= libft.a
@@ -11,28 +14,26 @@ SRCS		= ./ft_printf.c\
 			  ./pointer.c\
 			  ./ampersand.c
 OBJS		= $(SRCS:.c=.o)
-INCS		= .
-RM			= rm -f
-LIBC		= ar rc
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+INCS		= ./
 
 .c.o :
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I$(INCS)
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(INCS)
 
 $(NAME) : $(OBJS)
 	make all -C $(LIBFT)/
 	cp $(LIBFT)/$(LIBFT_LIB) $(NAME)
-	$(LIBC) $(NAME) $(OBJS)
+	ar rc $(NAME) $(OBJS)
 
 all : $(NAME)
 
 fclean : clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 	make fclean -C $(LIBFT)
 
 clean :
-	$(RM) $(OBJS)
+	rm -f $(OBJS)
 	make clean -C $(LIBFT)
 
 re : fclean all
+
+.POHNY : all fclean clean re
