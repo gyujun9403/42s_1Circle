@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 14:34:38 by gyeon             #+#    #+#             */
-/*   Updated: 2021/06/09 12:53:31 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/06/09 15:28:03 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,12 @@ size_t	f_len_zero_p(unsigned long long num, t_data data, int degree)
 		if (data.flg_zero == TRUE && data.flg_hypen == FALSE
 			&& data.flg_precision == FALSE)
 		{
-			if (digit < data.leng_width && data.leng_width > 12)
+			if (digit < data.leng_width)
 				return (data.leng_width - digit);
 		}
 		else
 		{
-			if (digit < data.leng_precision && data.leng_precision > 12)
+			if (digit < data.leng_precision)
 				return (data.leng_precision - digit);
 		}
 	}

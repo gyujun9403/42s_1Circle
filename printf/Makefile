@@ -1,7 +1,7 @@
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-NAME		= libftprintf.a
+NAME		= ./libftprintf.a
 LIBFT		= libft
 LIBFT_LIB	= libft.a
 SRCS_LIBFT	= ./$(LIBFT)/ft_bzero.c \
@@ -39,7 +39,7 @@ fclean : clean
 
 clean :
 	rm -f $(OBJS)
-	rm -f $(LIBFT)/$(OBJS_LIBFT)
+	rm -f $(OBJS_LIBFT)
 
 re : fclean all
 
