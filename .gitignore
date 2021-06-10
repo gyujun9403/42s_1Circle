@@ -12,7 +12,6 @@ badsol/
 GNL_lover/
 *lover*
 *.a
-*libft*
 printf/libft/libft.a
 printf/libftprintf.a
 pft/

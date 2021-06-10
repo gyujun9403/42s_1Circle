@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gyeon <gyeon@student.42seoul.kr>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/06/10 11:53:34 by gyeon             #+#    #+#              #
+#    Updated: 2021/06/10 11:53:44 by gyeon            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
@@ -43,4 +55,4 @@ clean :
 
 re : fclean all
 
-.POHNY : all fclean clean re
+.PHONY : all fclean clean re
