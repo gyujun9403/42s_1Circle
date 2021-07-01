@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:48 by ygj               #+#    #+#             */
-/*   Updated: 2021/06/03 19:02:11 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 11:34:20 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 10240
+# endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 16
 # endif
 # define ERR -1
 # define FREE_ALL 1
