@@ -6,7 +6,7 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:48 by ygj               #+#    #+#             */
-/*   Updated: 2021/07/01 11:34:20 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/10/02 12:44:35 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define OPEN_MAX 10240
 # endif
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 16
+#  define BUFFER_SIZE 1024
 # endif
 # define ERR -1
 # define FREE_ALL 1
@@ -29,7 +29,7 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef	struct	s_bufflst
+typedef struct s_bufflst
 {
 	char				*buff;
 	char				*st_buff;

@@ -6,21 +6,22 @@
 /*   By: gyeon <gyeon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:41:10 by ygj               #+#    #+#             */
-/*   Updated: 2021/06/03 18:26:19 by gyeon            ###   ########.fr       */
+/*   Updated: 2021/10/02 12:41:45 by gyeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static	t_bufflst	*arr[OPEN_MAX] = {NULL};
+	static t_bufflst	*arr[OPEN_MAX] = {NULL};
 
 	if (fd >= 0 && fd < OPEN_MAX && BUFFER_SIZE > 0 && line)
 	{
 		if (arr[fd] == NULL || (arr[fd] != NULL && arr[fd]->num_nl == 0))
-			while (rnadd_lst(fd, &arr[fd]) &&
-			!(find_lastlst(arr[fd])->num_nl || find_lastlst(arr[fd])->is_eof))
+			while (rnadd_lst(fd, &arr[fd])
+				&& !(find_lastlst(arr[fd])->num_nl
+					|| find_lastlst(arr[fd])->is_eof))
 				;
 		if (arr[fd] != NULL)
 		{
@@ -39,7 +40,7 @@ int			get_next_line(int fd, char **line)
 	return (-1);
 }
 
-void		cnt_nl(t_bufflst *lst)
+void	cnt_nl(t_bufflst *lst)
 {
 	short	flg;
 	size_t	index;
@@ -75,7 +76,7 @@ t_bufflst	*rnadd_lst(int fd, t_bufflst **lst)
 	return (NULL);
 }
 
-char		*get_line(t_bufflst **lst)
+char	*get_line(t_bufflst **lst)
 {
 	size_t		len_line;
 	size_t		idx;
@@ -97,7 +98,7 @@ char		*get_line(t_bufflst **lst)
 	return (buffcat(lst, len_line));
 }
 
-char		*buffcat(t_bufflst **lst, size_t len_line)
+char	*buffcat(t_bufflst **lst, size_t len_line)
 {
 	size_t		idx;
 	char		*line;
